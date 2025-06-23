@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import fetchModel from './fetchModel'
+
 import './AlbumDetail.css'
+import Play from '../../Buttons/Play'
+import fetchModel from '../../lib/fetchModel'
 
 function AlbumDetail() {
     const { id } = useParams()
@@ -65,18 +67,13 @@ function AlbumDetail() {
                 style={{
                     top: 0
                 }}>
-                <button className='btn btn-success rounded-pill'>
-                    <i className="bi bi-play-fill text-dark" style={{ fontSize: 20 }}></i>
-                </button>
+                <Play />
                 <h1 className="fw-bold mb-0">{currentAlbum.name}</h1>
             </div>
             {/* CONTROL */}
             <div className='px-4 py-3 d-flex align-items-center justify-content-between'>
                 <div className='d-flex align-items-center justify-content-center gap-3'>
-                    <button className='btn btn-success rounded-pill'>
-                        <i className="bi bi-play-fill text-dark" style={{ fontSize: 20 }}></i>
-                    </button>
-
+                    <Play />
                     <img src={currentAlbum.images[2].url} alt=""
                         className='p-1 border-secondary border rounded-3 img-fluid'
                         style={{

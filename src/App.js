@@ -1,16 +1,14 @@
 import React from 'react'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import CallbackPage from './Component/CallbackPage';
-import Layout from './Component/Layout';
-import Home from './Component/Home/Home';
-import Login from './Component/Login';
-import Profile from './Component/Profile';
-import AlbumDetail from './Component/AlbumDetail';
-import Library from './Component/Home/Library';
-
-import TrackDetail from './Component/TrackDetail';
-import ArtistDetail from './Component/ArtistDetail';
+import Layout from './Component/Layout/Layout';
 import MainContent from './Component/Home/MainContent';
+import Login from './Component/Home/Login';
+import Profile from './Component/Home/Profile';
+import AlbumDetail from './Component/Albums/Detail/AlbumDetail';
+import TrackDetail from './Component/Track/TrackDetail';
+import ArtistDetail from './Component/Artist/ArtistDetail';
+import CallbackPage from './Component/Home/CallbackPage';
+
 
 function App() {
   return (

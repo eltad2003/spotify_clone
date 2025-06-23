@@ -1,5 +1,5 @@
 import React from 'react'
-import { generateCodeChallenge, generateRandomString } from "./SpotifyAuth";
+import { generateCodeChallenge, generateRandomString } from "../lib/SpotifyAuth";
 
 function Login() {
     const clientId = process.env.REACT_APP_CLIENT_ID;

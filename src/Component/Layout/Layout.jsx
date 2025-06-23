@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, Outlet } from 'react-router-dom'
-import Library from './Home/Library'
-import Playlist from './Home/MainContent'
+import Library from '../Home/Library'
+import Playlist from '../Home/MainContent'
 import AudioBar from './AudioBar'
 
 function Layout() {
@@ -10,7 +10,7 @@ function Layout() {
         <>
             <nav className="navbar navbar-expand-sm navbar-light bg">
                 <div className="container-fluid d-flex justify-content-between align-items-center" >
-                    <a href="/" className='px-3 mb-0'><i className="bi bi-spotify text-success fs-1"></i></a>
+                    <a href="/" className='px-3 mb-0' ><i className="bi bi-spotify fs-1" style={{ color: '#1db954' }}></i></a>
                     <div className="d-flex mb-0 my-lg-0">
                         <a className="me-2" href="/" >
                             <i className="bi bi-house-door-fill text-white fs-2" ></i>

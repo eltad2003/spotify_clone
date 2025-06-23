@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import fetchModel from './fetchModel'
+
 import { Link } from 'react-router-dom'
 import './Album.css'
+import fetchModel from '../../lib/fetchModel'
 function Album() {
     const [albums, setAlbums] = useState([])
     const [hovered, setHovered] = useState(null)

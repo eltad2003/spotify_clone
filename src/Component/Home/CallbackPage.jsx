@@ -45,7 +45,6 @@ const CallbackPage = () => {
   }, []);
 
   return (
-
     <div className="container text-white">
       <h2>Spotify Callback</h2>
       {profile ? (

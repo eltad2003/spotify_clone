@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import audioTest from './Có duyên không nợ- DEZIN X TUKI.mp3'
+import audioTest from '../Có duyên không nợ- DEZIN X TUKI.mp3'
 
 function AudioBar({ audio }) {
     const [isPlaying, setIsPlaying] = useState(false)

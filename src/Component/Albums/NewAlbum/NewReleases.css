@@ -1,0 +1,4 @@
+#card_album a:hover {
+    text-decoration: underline !important;
+    transition: all 0.5s;
+}
