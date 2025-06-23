@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import CallbackPage from './Component/CallbackPage';
+import Layout from './Component/Layout';
+import Home from './Component/Home/Home';
+import Login from './Component/Login';
+import Profile from './Component/Profile';
+import AlbumDetail from './Component/AlbumDetail';
+import Library from './Component/Home/Library';
+
+import TrackDetail from './Component/TrackDetail';
+import ArtistDetail from './Component/ArtistDetail';
+import MainContent from './Component/Home/MainContent';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <BrowserRouter>
+      <Routes>
+        <Route path='/callback' element={<CallbackPage />} />
+        <Route path='/' element={<Layout />} >
+          <Route index path='/' element={<MainContent />} />
+          <Route path='/login' element={<Login />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path='/album/:id' element={<AlbumDetail />} />
+          <Route path='/track/:id' element={<TrackDetail />} />
+          <Route path='/artist/:id' element={<ArtistDetail />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App

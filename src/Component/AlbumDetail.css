@@ -1,0 +1,11 @@
+#album_img:hover {
+    /*zoom to 1.3x*/
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: all 0.3s ease-out;
+}
+
+.table a:hover {
+    text-decoration: underline !important;
+}
+
