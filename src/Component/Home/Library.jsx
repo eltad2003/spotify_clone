@@ -7,8 +7,8 @@ function Library() {
 
     return (
         <div className='card bg-dark h-100 rounded-3' style={{
-            minHeight: '75vh',
-            maxHeight: '75vh',
+            minHeight: '78vh',
+            maxHeight: '78vh',
             width: showLibrary ? 410 : 70,
             transition: 'width .1s ease'
         }}>

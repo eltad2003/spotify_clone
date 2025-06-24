@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 
 import { Link } from 'react-router-dom'
-import './Album.css'
+import './AlbumSection.css'
 import fetchModel from '../../lib/fetchModel'
-function Album() {
+function AlbumSection() {
     const [albums, setAlbums] = useState([])
     const [hovered, setHovered] = useState(null)
     useEffect(() => {
@@ -79,4 +79,4 @@ function Album() {
     )
 }
 
-export default Album
+export default AlbumSection

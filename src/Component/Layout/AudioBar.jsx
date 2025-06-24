@@ -59,19 +59,19 @@ function AudioBar({ audio }) {
     }, [repeat])
 
     return (
-        <div className=' bg align-items-center d-flex justify-content-between text-white fixed-bottom p-3'>
+        <div className='bg align-items-center d-flex  text-white fixed-bottom p-2'>
             <audio
                 src={audioTest}
                 ref={audioRef}
                 onTimeUpdate={handleTimeUpdate}
                 onLoadedMetadata={handleLoadedMetadata}
             />
-            <div>
+            <div className='flex-row'>
 
             </div>
 
             {/* Các nút chức năng */}
-            <div className='d-flex flex-column justify-content-center align-items-center gap-2'>
+            <div className='d-flex flex-column flex-grow-1 align-items-center gap-2'>
                 <div className="d-flex gap-2">
                     {/* trộn bài */}
                     <button className='btn btn-outline-dark text-white btm-sm'>
@@ -98,7 +98,7 @@ function AudioBar({ audio }) {
                 </div>
 
                 {/* Thêm hiển thị thời gian */}
-                <div className='d-flex gap-2'>
+                <div className='d-flex flex-row gap-2'>
                     <span >{formatTime(currentTime)}</span>
                     <input
                         type="range"

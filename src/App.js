@@ -22,6 +22,9 @@ function App() {
           <Route path='/album/:id' element={<AlbumDetail />} />
           <Route path='/track/:id' element={<TrackDetail />} />
           <Route path='/artist/:id' element={<ArtistDetail />} />
+          <Route path='/section'>
+            
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>

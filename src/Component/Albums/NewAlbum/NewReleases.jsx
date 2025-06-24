@@ -5,6 +5,8 @@ import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
 import './NewReleases.css';
 import Play from '../../Buttons/Play';
+import { responsive } from '../../lib/responsiveCarousel';
+import ShowAll from '../../Buttons/ShowAll';
 
 function NewReleases() {
     const [newReleases, setNewReleases] = useState(null)
@@ -14,35 +16,20 @@ function NewReleases() {
             .then(data => { setNewReleases(data.albums); console.log('new-releases: ', data.albums) })
             .catch(err => console.log('error: ', err))
     }, [])
-    const responsive = {
-        superLargeDesktop: {
-            // the naming can be any, depends on you.
-            breakpoint: { max: 4000, min: 3000 },
-            items: 5
-        },
-        desktop: {
-            breakpoint: { max: 3000, min: 1024 },
-            items: 6
-        },
-        tablet: {
-            breakpoint: { max: 1024, min: 464 },
-            items: 2
-        },
-        mobile: {
-            breakpoint: { max: 464, min: 0 },
-            items: 1
-        }
-    };
+
     if (!newReleases) return (
         <div className='spinner spinner-success'></div>
     )
     return (
         <div className='container mt-3'>
-            <p className='card-title fs-4 text-white fw-bold'>Album mới phát hành</p>
+            <div className='d-flex align-items-center px-3'>
+                <p className='card-title fs-4 text-white fw-bold'>Album mới phát hành</p>
+                <ShowAll />
+            </div>
             <Carousel responsive={responsive}>
                 {newReleases.items.map((item, idx) => (
 
-                    <div key={idx} className={`shadow-sm text-center rounded-3 p-2 ${hovered === idx ? 'bg' : ''}`}
+                    <div key={idx} className={`text-center rounded-3 p-2 ${hovered === idx ? 'bg' : ''}`}
                         id='card_album'
                         onMouseEnter={() => setHovered(idx)}
                         onMouseLeave={() => setHovered(null)}
