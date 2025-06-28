@@ -1,9 +1,15 @@
-#list_card img:hover {
+#list_album img:hover {
     transform: scale(1.02);
     transition: all 0.5s;
-    cursor: pointer;
+
 }
 
-#list_card a:hover {
+#list_album :hover {
+    cursor: pointer;
+
+}
+
+#list_album a:hover {
     text-decoration: underline !important;
+
 }

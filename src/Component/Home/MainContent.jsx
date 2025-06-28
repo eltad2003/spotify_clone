@@ -1,10 +1,11 @@
 import React from 'react'
 import NewReleases from '../Albums/NewAlbum/NewReleases'
 
-import Artist from '../Artist/Artist'
+import Artist from '../Artist/TopArtist'
 import Playlists from '../Playlists/Playlists'
 import AlbumSection from '../Albums/Album/AlbumSection'
 import CategoriesSection from '../Categories/Section/CategoriesSection'
+import TopTrack from '../Track/TopTrack'
 
 
 
@@ -21,6 +22,7 @@ function MainContent() {
                 <NewReleases />
                 <CategoriesSection />
                 <Artist />
+                <TopTrack />
                 {/* <AlbumSection /> */}
                 <Playlists />
             </div>

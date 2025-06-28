@@ -4,16 +4,18 @@ import { Link, useParams } from 'react-router-dom'
 import './AlbumDetail.css'
 import Play from '../../Buttons/Play'
 import fetchModel from '../../lib/fetchModel'
+import { formatTime } from '../../lib/format'
+import TitleSection from '../../TitleSection'
+import AlbumComponent from '../Album/AlbumComponent'
+import Loading from '../../Loading'
 
 function AlbumDetail() {
     const { id } = useParams()
     const [currentAlbum, setCurrentAlbum] = useState(null)
+    const [artistAlbum, setArtistAlbum] = useState(null)
     const [hovered, setHovered] = useState(null)
-    const formatTime = (sec) => {
-        const minutes = Math.floor(sec / 60000);
-        const seconds = Math.floor(sec % 60000 / 1000);
-        return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
-    }
+
+
     useEffect(() => {
         fetchModel(`${process.env.REACT_APP_API}/albums/${id}`)
             .then(data => {
@@ -22,9 +24,17 @@ function AlbumDetail() {
             .catch(err => console.log('error: ', err))
     }, [id])
 
-    if (!currentAlbum) {
+    // useEffect(() => {
+    //     fetchModel(`${process.env.REACT_APP_API}/artists/${artistId}/albums`)
+    //         .then(data => {
+    //             setArtistAlbum(data); console.log('album of artist: ', data);
+    //         })
+    //         .catch(err => console.log('error: ', err))
+    // }, [artistId])
+
+    if (!currentAlbum || !artistAlbum) {
         return (
-            <div className='spinner spinner-success'></div>
+            <Loading />
         )
     }
 
@@ -32,7 +42,7 @@ function AlbumDetail() {
 
         <div style={{ minHeight: '75vh', maxHeight: '75vh', overflow: 'auto' }}>
             {/* HEADER */}
-            <div className="card-header bg-secondary rounded-top-4 p-4 d-flex gap-4">
+            <div className="card-header bg-secondary rounded-top-3 p-4 d-flex gap-4">
                 <img
                     src={currentAlbum.images[0].url}
                     id='album_img'
@@ -42,8 +52,8 @@ function AlbumDetail() {
                     className="rounded-3 shadow"
                 />
                 <div className="d-flex flex-column justify-content-end">
-                    <p className="text-uppercase fw-bold text-white mb-1">
-                        {currentAlbum.type}
+                    <p className="text-uppercase fw-semibold text-white mb-1">
+                        {currentAlbum.album_type}
                     </p>
                     <h1 className="fw-bold mb-3">{currentAlbum.name}</h1>
                     <div className="d-flex align-items-center gap-2 text-white-50">
@@ -54,7 +64,7 @@ function AlbumDetail() {
                             height={32}
                             className="rounded-pill"
                         />
-                        <span className="fw-semibold text-white">
+                        <span className="fw-bold text-white">
                             {currentAlbum.artists.map((a) => a.name)}
                         </span>
                         <span>• {currentAlbum.release_date}</span>
@@ -73,11 +83,11 @@ function AlbumDetail() {
             {/* CONTROL */}
             <div className='px-4 py-3 d-flex align-items-center justify-content-between'>
                 <div className='d-flex align-items-center justify-content-center gap-3'>
-                    <Play />
-                    <img src={currentAlbum.images[2].url} alt=""
+                    <Play size={28} />
+                    <img src={currentAlbum.images[0].url} alt=""
                         className='p-1 border-secondary border rounded-3 img-fluid'
                         style={{
-                            width: 50, height: 70,
+                            width: 40, height: 50,
                         }}
                     />
                     <button className='btn btn-sm'>
@@ -93,8 +103,6 @@ function AlbumDetail() {
                 <button className="btn btn-sm text-white fw-semibold">
                     Danh sách <i className="bi bi-list"></i>
                 </button>
-
-
             </div>
 
             {/* TRACK LIST */}
@@ -152,9 +160,24 @@ function AlbumDetail() {
             {/* copyrights */}
             <div className='px-3 text-white-50 small mt-3'>
                 {currentAlbum.copyrights.map((a, i) => (
-                    <p style={{ fontSize: 10 }}>{a.text}</p>
+                    <p style={{ fontSize: 10 }} key={i}>{a.text}</p>
                 ))}
             </div>
+            {/* 
+            <div>
+                <TitleSection title={`Album khác của ${currentAlbum.artists.map((a) => a.name)}`} />
+                <div className="d-flex">
+                    <AlbumComponent list={{ ...artistAlbum, items: artistAlbum?.items.slice(0, 7) }}>
+                        {item => (
+
+                            <p className='text-wrap text-white-50 fw-semibold' style={{ maxWidth: 200, fontSize: 14 }} >
+                                {new Date(item.release_date).getFullYear()} • {item.album_type}
+                            </p>
+
+                        )}
+                    </AlbumComponent>
+                </div>
+            </div> */}
 
         </div>
 

@@ -68,7 +68,7 @@ function Layout() {
                         <Library />
                     </div>
                     <div className="flex-grow-1">
-                        <div className='card bg-dark rounded-3 h-100 text-white'>
+                        <div className='card bg-dark rounded-3 h-100 text-white' >
                             <Outlet />
                         </div>
                     </div>
