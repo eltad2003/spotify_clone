@@ -10,36 +10,35 @@ import Loading from '../Loading'
 
 function ArtistDetail() {
     const { id } = useParams()
+
     const [artist, setArtist] = useState(null)
+    const [artistsRelated, setArtistsRelated] = useState(null)
     const [albums, setAlbums] = useState(null)
     const [topTrack, setTopTrack] = useState(null)
+
     const [hovered, setHovered] = useState(null)
     const [showAll, setShowAll] = useState(false)
     const [isAddPlaylist, SetIsAddPlaylist] = useState(false)
     const [isFollow, SetIsFollow] = useState(false)
 
     useEffect(() => {
-        fetchModel(`${process.env.REACT_APP_API}/artists/${id}`)
-            .then(data => {
-                setArtist(data); console.log(data);
-            })
-            .catch(err => console.log('error: ', err))
-    }, [id])
-    useEffect(() => {
-        fetchModel(`${process.env.REACT_APP_API}/artists/${id}/top-tracks`)
-            .then(data => {
-                setTopTrack(data.tracks); console.log('top track: ', data.tracks);
-            })
-            .catch(err => console.log('error: ', err))
-    }, [id])
+        const fetchAll = async () => {
+            const [artistData, topTrackData, albumData] = await Promise.all([
+                fetchModel(`${process.env.REACT_APP_API}/artists/${id}`),
+                fetchModel(`${process.env.REACT_APP_API}/artists/${id}/top-tracks`),
+                fetchModel(`${process.env.REACT_APP_API}/artists/${id}/albums`),
 
-    useEffect(() => {
-        fetchModel(`${process.env.REACT_APP_API}/artists/${id}/albums`)
-            .then(data => {
-                setAlbums(data); console.log('album of artist: ', data);
-            })
-            .catch(err => console.log('error: ', err))
-    }, [id])
+            ]);
+            if (artistData) setArtist(artistData);
+            if (topTrackData) setTopTrack(topTrackData.tracks);
+            if (albumData) setAlbums(albumData);
+
+
+
+        };
+        fetchAll();
+    }, [id]);
+
 
     if (!artist || !topTrack || !albums) {
         return (
@@ -48,11 +47,11 @@ function ArtistDetail() {
     }
 
     return (
-        <div style={{ minHeight: '75vh', maxHeight: '75vh', overflow: 'auto' }}>
+        <div style={{ minHeight: '78vh', maxHeight: '78vh', overflow: 'auto' }}>
             <div className="card-header bg-secondary rounded-top-3"
                 style={{
                     position: 'relative',
-                    minHeight: 300,
+                    minHeight: 320,
                     backgroundImage: artist.images && artist.images.length > 0 ? `url(${artist.images[0].url})` : undefined,
                     backgroundSize: 'cover',
                     backgroundPosition: 'center',
@@ -82,7 +81,7 @@ function ArtistDetail() {
                 <button className='btn btn-sm p-0'>
                     <i className="bi bi-shuffle text-white-50" style={{ fontSize: 28 }}></i>
                 </button>
-                <button className='btn btn-sm rounded-pill text-white active fw-bold' onClick={() => SetIsFollow(true)}>
+                <button className='btn btn-sm rounded-pill text-white active fw-bold' onClick={() => SetIsFollow(!isFollow)}>
                     {isFollow ? 'Đang theo dõi' : 'Theo dõi'}
                 </button>
                 <button className='btn btn-sm p-0'>
@@ -178,21 +177,23 @@ function ArtistDetail() {
                     </button>
                 ) : null}
             </div>
-            {/* Album of artist */}
 
+            {/* Album of artist */}
             <div className='px-4 py-3'>
                 <TitleSection title={'Danh sách đĩa nhạc'} />
                 <div className="d-flex">
                     <AlbumComponent list={{ ...albums, items: albums.items.slice(0, 7) }}>
                         {item => (
                             <p className='text-wrap text-white-50 fw-semibold' style={{ maxWidth: 200, fontSize: 14 }} >
-                                {new Date(item.release_date).getFullYear() === 2025 ? 'Bản phát hành mới nhất' : new Date(item.release_date).getFullYear()} • {item.album_type}
+                                {new Date(item.release_date).getFullYear() === 2025 ? 'Bản phát hành mới nhất' : new Date(item.release_date).getFullYear()} •
+                                <span className='text-capitalize'> {item.album_type}</span>
                             </p>
                         )}
                     </AlbumComponent>
                 </div>
 
             </div>
+            {/* Playlist of artist */}
         </div>
 
     )

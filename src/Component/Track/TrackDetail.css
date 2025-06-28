@@ -1,0 +1,8 @@
+#track_artist:hover {
+    background-color: black;
+    cursor: pointer;
+}
+
+#track_artist a:hover {
+    text-decoration: underline !important;
+}

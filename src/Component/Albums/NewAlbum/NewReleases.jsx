@@ -21,7 +21,7 @@ function NewReleases() {
         <Loading />
     )
     return (
-        <div className='container mt-3'>
+        <div className='container my-3'>
             <TitleSection title={'Album mới phát hành'} url={'section'} />
             <Carousel responsive={responsive}>
 

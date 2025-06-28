@@ -3,6 +3,7 @@ import { Link, Outlet } from 'react-router-dom'
 import Library from '../Home/Library'
 import Playlist from '../Home/MainContent'
 import AudioBar from './AudioBar'
+import Footer from './Footer'
 
 function Layout() {
     const [isDropdown, setIsDropdown] = useState(false)
@@ -62,16 +63,21 @@ function Layout() {
                     </div>
                 )}
             </nav>
-            <div className='container-fluid'>
+            {/* main layout */}
+            <div className='container-fluid' style={{ minHeight: 'calc(100vh - 120px)', minWidth: '100vh' }}>
                 <div className="d-flex gap-2">
                     <div className="flex-row">
                         <Library />
                     </div>
-                    <div className="flex-grow-1">
-                        <div className='card bg-dark rounded-3 h-100 text-white' >
-                            <Outlet />
+                    <div className="flex-grow-1 flex-wrap">
+                        <div className='card h-100 bg-dark rounded-3 text-white' >
+                            <Outlet >
+                                {/* <Footer /> */}
+                            </Outlet>
                         </div>
                     </div>
+
+
                 </div>
                 <AudioBar />
             </div>

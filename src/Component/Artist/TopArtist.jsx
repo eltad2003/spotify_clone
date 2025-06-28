@@ -13,17 +13,21 @@ function TopArtist() {
     }, [])
 
     return (
-        <div className='container mt-3'>
-            <TitleSection title={'Top Nghệ sĩ'} url={`/section/topArtist`} />
-            <CardItem list={artists} typeLink={'artist'} rounded={'3'} >
-                {item => (
-                    <div className='text-start'>
-                        <p className='fw-semibold mt-2 mb-0'>{item.name}</p>
-                        <p className='fw-semibold small text-white-50'>{item.type === 'artist' && 'Nghệ sĩ'}</p>
-                    </div>
-                )}
-            </CardItem>
-        </div>
+        <>
+            {artists?.length > 0 && (
+                <div className='container mt-3'>
+                    <TitleSection title={'Top Nghệ sĩ'} url={`/section/topArtist`} />
+                    <CardItem list={artists} typeLink={'artist'} rounded={'3'} >
+                        {item => (
+                            <div className='text-start'>
+                                <p className='fw-semibold mt-2 mb-0'>{item.name}</p>
+                                <p className='fw-semibold small text-white-50'>{item.type === 'artist' && 'Nghệ sĩ'}</p>
+                            </div>
+                        )}
+                    </CardItem>
+                </div>
+            )}
+        </>
     )
 }
 

@@ -28,7 +28,7 @@ function AlbumComponent({ list, children }) {
                                 )}
                             </div>
 
-                            <Link to={`/track/${item.id}`} className="text-decoration-none fw-semibold text-white mb-0 text-start">
+                            <Link to={`/album/${item.id}`} className="text-decoration-none fw-semibold text-white mb-0 text-start">
                                 {item.name}
                             </Link>
                             {children && children(item)}

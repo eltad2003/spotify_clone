@@ -13,10 +13,14 @@ function Playlists() {
             .catch(err => console.log('error: ', err))
     }, [])
     return (
-        < div className='container mt-3' >
-            <TitleSection title={'Tuyển tập nhạc hay nhất của các nghệ sĩ'} />
-            <CardItem list={playlists} rounded={'3'} typeLink={'playlists'} />
-        </div >
+        <>
+            {playlists?.length > 0 && (
+                <div className='container mt-3' >
+                    <TitleSection title={'Tuyển tập nhạc hay nhất của các nghệ sĩ'} />
+                    <CardItem list={playlists} rounded={'3'} typeLink={'playlists'} />
+                </div>
+            )}
+        </>
     )
 }
 

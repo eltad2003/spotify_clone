@@ -6,6 +6,8 @@ import Playlists from '../Playlists/Playlists'
 import AlbumSection from '../Albums/Album/AlbumSection'
 import CategoriesSection from '../Categories/Section/CategoriesSection'
 import TopTrack from '../Track/TopTrack'
+import TopPlaylist from '../Playlists/TopPlaylist'
+import Footer from '../Layout/Footer'
 
 
 
@@ -21,10 +23,14 @@ function MainContent() {
             <div className='card-body'>
                 <NewReleases />
                 <CategoriesSection />
+                {/* <TopPlaylist /> */}
+
+                {/* me */}
                 <Artist />
                 <TopTrack />
-                {/* <AlbumSection /> */}
                 <Playlists />
+                <AlbumSection />
+
             </div>
         </div>
     )

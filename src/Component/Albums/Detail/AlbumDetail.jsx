@@ -14,7 +14,7 @@ function AlbumDetail() {
     const [currentAlbum, setCurrentAlbum] = useState(null)
     const [artistAlbum, setArtistAlbum] = useState(null)
     const [hovered, setHovered] = useState(null)
-
+    const artistId = currentAlbum?.artists[0]?.id;
 
     useEffect(() => {
         fetchModel(`${process.env.REACT_APP_API}/albums/${id}`)
@@ -24,13 +24,13 @@ function AlbumDetail() {
             .catch(err => console.log('error: ', err))
     }, [id])
 
-    // useEffect(() => {
-    //     fetchModel(`${process.env.REACT_APP_API}/artists/${artistId}/albums`)
-    //         .then(data => {
-    //             setArtistAlbum(data); console.log('album of artist: ', data);
-    //         })
-    //         .catch(err => console.log('error: ', err))
-    // }, [artistId])
+    useEffect(() => {
+        fetchModel(`${process.env.REACT_APP_API}/artists/${artistId}/albums`)
+            .then(data => {
+                setArtistAlbum(data); console.log('album of artist: ', data);
+            })
+            .catch(err => console.log('error: ', err))
+    }, [artistId])
 
     if (!currentAlbum || !artistAlbum) {
         return (
@@ -106,7 +106,7 @@ function AlbumDetail() {
             </div>
 
             {/* TRACK LIST */}
-            <div className="px-4">
+            <div className="px-4 py-3">
                 <table className="table table-borderless table-hover table-dark align-middle">
                     <thead className="text-white position-sticky top-0 z-2">
                         <tr>
@@ -123,6 +123,7 @@ function AlbumDetail() {
                                 <td
                                     onMouseEnter={() => setHovered(idx)}
                                     onMouseLeave={() => setHovered(null)}
+                                    style={{ width: 50 }}
                                 >
                                     {hovered === idx ? (
                                         <button className="btn p-0 m-0">
@@ -158,26 +159,24 @@ function AlbumDetail() {
                 </table>
             </div>
             {/* copyrights */}
-            <div className='px-3 text-white-50 small mt-3'>
+            <div className='px-4 pb-3 text-white-50 small'>
                 {currentAlbum.copyrights.map((a, i) => (
                     <p style={{ fontSize: 10 }} key={i}>{a.text}</p>
                 ))}
             </div>
-            {/* 
-            <div>
+
+            <div className='px-4 py-3'>
                 <TitleSection title={`Album khác của ${currentAlbum.artists.map((a) => a.name)}`} />
                 <div className="d-flex">
                     <AlbumComponent list={{ ...artistAlbum, items: artistAlbum?.items.slice(0, 7) }}>
                         {item => (
-
                             <p className='text-wrap text-white-50 fw-semibold' style={{ maxWidth: 200, fontSize: 14 }} >
                                 {new Date(item.release_date).getFullYear()} • {item.album_type}
                             </p>
-
                         )}
                     </AlbumComponent>
                 </div>
-            </div> */}
+            </div>
 
         </div>
 

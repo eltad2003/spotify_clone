@@ -14,6 +14,8 @@ function Profile() {
 
             }
             const data = await res.json();
+            console.log(res.status);
+            
             console.log(data);
 
             setProfile(data)
