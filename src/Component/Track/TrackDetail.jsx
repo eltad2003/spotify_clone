@@ -13,12 +13,11 @@ import AlbumComponent from '../Albums/Album/AlbumComponent'
 function TrackDetail() {
     const { id } = useParams()
     const [tracks, setTracks] = useState()
-    const [artists, setArtists] = useState()
+    const [currentArtist, setCurrentArtist] = useState()
     const [topTracks, setTopTracks] = useState()
     const [albums, setAlbums] = useState(null)
+    const [artists, setArtists] = useState()
     const artistId = tracks?.artists[0]?.id
-
-
 
     useEffect(() => {
         const fetchAll = async () => {
@@ -31,7 +30,7 @@ function TrackDetail() {
 
             if (trackData) setTracks(trackData)
             if (topTracksData) setTopTracks(topTracksData.tracks)
-            if (artistData) setArtists(artistData)
+            if (artistData) setCurrentArtist(artistData)
             if (albumData) setAlbums(albumData);
             console.log('track: ', trackData);
 
@@ -39,7 +38,20 @@ function TrackDetail() {
         fetchAll()
     }, [id, artistId])
 
-    if (!tracks || !topTracks || !artists || !albums) return <Loading />
+    useEffect(() => {
+        if (!tracks) return;
+        const fetchArtists = async () => {
+            const results = await Promise.all(
+                tracks.artists.map(a =>
+                    fetchModel(`${process.env.REACT_APP_API}/artists/${a.id}`)
+                )
+            );
+            setArtists(results);
+        };
+        fetchArtists();
+    }, [tracks]);
+
+    if (!tracks || !topTracks || !currentArtist || !albums || !artists) return <Loading />
     return (
         <div style={{ minHeight: '78vh', maxHeight: '78vh', overflow: 'auto' }}>
             <div className="card-header bg-secondary px-4 py-3">
@@ -53,14 +65,14 @@ function TrackDetail() {
                         className="rounded-3 shadow"
                     />
                     <div className="d-flex flex-column justify-content-end">
-                        <p className="fw-semibold text-white">
+                        <p className="fw-semibold text-white mb-0">
                             {tracks.type === 'track' && 'Bài hát'}
                         </p>
-                        <h1 className="fw-bolder display-1">{tracks.name}</h1>
+                        <h1 className="fw-bolder " style={{ fontSize: 32 }}>{tracks.name}</h1>
 
                         <div className="d-flex align-items-center gap-2 text-white-50">
                             <img
-                                src={artists.images[0].url}
+                                src={currentArtist.images[0].url}
                                 alt="artist"
                                 width={32}
                                 height={32}
@@ -91,19 +103,20 @@ function TrackDetail() {
                 </button>
             </div>
             {/* artist */}
-            {tracks.artists.map(artist => (
+            {artists.map(artist => (
                 <div className='p-2 d-flex gap-3 mx-4 rounded-2' id='track_artist' key={artist.id}>
                     <Link to={`/artist/${artist.id}`}>
-                        <img src={tracks.album.images[0].url} alt={artist.name} width={80} height={80} className='rounded-circle' />
+                        <img src={artist.images[0]?.url} alt={artist.name} width={80} height={80} className='rounded-circle' />
                     </Link>
                     <div className="d-flex flex-column justify-content-center">
-                        <p className='text-capitalize mb-0'>{artist.type}</p>
+                        <p className='fw-semibold mb-0'>{artist.type === 'artist' && 'Nghệ sĩ'}</p>
                         <Link to={`/artist/${artist.id}`} className="text-decoration-none fw-bold text-white">
                             {artist.name}
                         </Link>
                     </div>
                 </div>
             ))}
+
             {/*Top track of artist */}
             <div className='px-4 mt-4 mb-0'>
                 <small className='text-white-50 fw-semibold'>Các bản nhạc thịnh hành của</small>
@@ -114,7 +127,7 @@ function TrackDetail() {
 
             {/* Album of artist */}
             <div className='px-4 py-3'>
-                <TitleSection title={`Các bản phát thịnh hành của ${artists.name}`} url={'/discography'} />
+                <TitleSection title={`Các bản phát thịnh hành của ${currentArtist.name}`} url={'/discography'} />
                 <div className="d-flex">
                     <AlbumComponent list={{ ...albums, items: albums?.items.slice(0, 7) }}>
                         {item => (
