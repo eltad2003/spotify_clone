@@ -25,7 +25,7 @@ function AlbumSection() {
                     return (
                         <div key={album.id} className="col-lg-4 col-md-6 g-2">
                             <div
-                                className="position-relative card-album z-3"
+                                className="position-relative card-album"
                                 onMouseEnter={() => setHovered(idx)}
                                 onMouseLeave={() => setHovered(null)}
                             >
@@ -33,21 +33,21 @@ function AlbumSection() {
                                     <img
                                         src={cover?.url}
                                         alt={album.name}
-                                        width={cover?.width}
-                                        height={cover?.height}
-                                        className="img-fluid rounded-4"
+                                        width={420}
+                                        height={400}
+                                        className="w-100 rounded-4 object-fit-cover"
                                     />
                                 </Link>
 
                                 {isHovered && (
-                                    <div className="d-flex gap-3 position-absolute top-0 start-0 px-4 py-2 bg-opacity-dark w-100  h-100 z-2 rounded-4">
+                                    <div className="d-flex gap-3 position-absolute top-0 start-0 px-4 py-2 bg-opacity-dark h-100 w-100 rounded-4">
                                         <Link to={`/album/${album.id}`}>
                                             <img
                                                 src={thumb?.url}
                                                 alt={album.name}
                                                 width={130}
                                                 height={130}
-                                                className="img-fluid object-fit-cover rounded-3"
+                                                className="img-fluid rounded-3 border border-secondary"
                                             />
                                         </Link>
 

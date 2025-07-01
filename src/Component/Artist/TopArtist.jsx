@@ -14,7 +14,7 @@ function TopArtist() {
 
     return (
         <>
-            {artists?.length > 0 && (
+            {artists && (
                 <div className='container mt-3'>
                     <TitleSection title={'Top Nghệ sĩ'} url={`/section/topArtist`} />
                     <CardItem list={artists} typeLink={'artist'} rounded={'3'} >

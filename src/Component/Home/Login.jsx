@@ -25,9 +25,13 @@ function Login() {
     }
 
     return (
-        <div style={{ padding: "2rem", color: 'white' }}>
-            <h2>Spotify Login Demo</h2>
-            <button onClick={handleLogin}>Login with Spotify</button>
+        <div className='container mt-3 min-vh-100'>
+            <div className="card-header">
+                <h2>Spotify Login Demo</h2>
+            </div>
+            <div className="card-body">
+                <button onClick={handleLogin}>Login with Spotify</button>
+            </div>
         </div>
     )
 }

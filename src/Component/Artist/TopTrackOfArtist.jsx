@@ -11,7 +11,7 @@ function TopTrackOfArtist({ topTrack }) {
             {(showAll ? topTrack.slice(0, 10) : topTrack.slice(0, 5)).map((track, idx) => (
                 <div
                     key={track.id}
-                    className={`bg-dark text-white`}
+                    className={`text-white`}
                     style={{ borderRadius: 12 }}
                     onMouseEnter={() => setHovered(idx)}
                     onMouseLeave={() => setHovered(null)}

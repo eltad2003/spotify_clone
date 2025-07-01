@@ -7,3 +7,7 @@
 #list_card a:hover {
     text-decoration: underline !important;
 }
+
+#list_card :hover {
+    cursor: pointer;
+}

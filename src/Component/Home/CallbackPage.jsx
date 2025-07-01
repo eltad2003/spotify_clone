@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const CallbackPage = () => {
   const [profile, setProfile] = useState([])
+  const navigator = useNavigate()
 
   const fetchToken = async () => {
     const params = new URLSearchParams(window.location.search);
@@ -42,7 +44,9 @@ const CallbackPage = () => {
 
   useEffect(() => {
     fetchToken();
-  }, []);
+    navigator('/')
+
+  }, [navigator]);
 
   return (
     <div className="container text-white">

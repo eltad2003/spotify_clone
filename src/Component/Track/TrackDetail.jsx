@@ -5,7 +5,6 @@ import Loading from '../Loading'
 import { formatTime } from '../lib/format'
 import Play from '../Buttons/Play'
 import './TrackDetail.css'
-import ArtistDetail from '../Artist/ArtistDetail'
 import TopTrackOfArtist from '../Artist/TopTrackOfArtist'
 import TitleSection from '../TitleSection'
 import AlbumComponent from '../Albums/Album/AlbumComponent'
@@ -13,15 +12,15 @@ import AlbumComponent from '../Albums/Album/AlbumComponent'
 function TrackDetail() {
     const { id } = useParams()
     const [tracks, setTracks] = useState()
-    const [currentArtist, setCurrentArtist] = useState()
+    const [currentArtist, setCurrentArtist] = useState() //main artist
     const [topTracks, setTopTracks] = useState()
     const [albums, setAlbums] = useState(null)
-    const [artists, setArtists] = useState()
+    const [artists, setArtists] = useState() //all artists in track
     const artistId = tracks?.artists[0]?.id
 
     useEffect(() => {
         const fetchAll = async () => {
-            const [trackData, topTracksData, artistData, albumData] = await Promise.all([
+            const [trackData, topTracksData, currentArtistData, albumData] = await Promise.all([
                 fetchModel(`${process.env.REACT_APP_API}/tracks/${id}`),
                 fetchModel(`${process.env.REACT_APP_API}/artists/${artistId}/top-tracks`),
                 fetchModel(`${process.env.REACT_APP_API}/artists/${artistId}`),
@@ -30,7 +29,7 @@ function TrackDetail() {
 
             if (trackData) setTracks(trackData)
             if (topTracksData) setTopTracks(topTracksData.tracks)
-            if (artistData) setCurrentArtist(artistData)
+            if (currentArtistData) setCurrentArtist(currentArtistData)
             if (albumData) setAlbums(albumData);
             console.log('track: ', trackData);
 
@@ -53,8 +52,8 @@ function TrackDetail() {
 
     if (!tracks || !topTracks || !currentArtist || !albums || !artists) return <Loading />
     return (
-        <div style={{ minHeight: '78vh', maxHeight: '78vh', overflow: 'auto' }}>
-            <div className="card-header bg-secondary px-4 py-3">
+        <div>
+            <div className="card-header px-4 py-3 bg-header">
                 <div className="d-flex gap-3">
                     <img
                         src={tracks.album.images[0].url}

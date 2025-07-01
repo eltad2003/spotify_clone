@@ -14,10 +14,10 @@ function Playlists() {
     }, [])
     return (
         <>
-            {playlists?.length > 0 && (
+            {playlists && (
                 <div className='container mt-3' >
                     <TitleSection title={'Tuyển tập nhạc hay nhất của các nghệ sĩ'} />
-                    <CardItem list={playlists} rounded={'3'} typeLink={'playlists'} />
+                    <CardItem list={playlists} rounded={'3'} typeLink={'playlist'} />
                 </div>
             )}
         </>

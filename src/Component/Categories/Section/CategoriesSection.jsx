@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import fetchModel from '../../lib/fetchModel';
-import './CategoriesSection.css'
+
 import CardItem from '../../CardItem';
 import TitleSection from '../../TitleSection';
 

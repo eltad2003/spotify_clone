@@ -28,15 +28,22 @@ function CardItem({ list, children, typeLink, rounded }) {
                     onMouseEnter={() => setHovered(idx)}
                     onMouseLeave={() => setHovered(null)}
                 >
-                    <Link to={`${typeLink}/${item.id}`}>
-                        <img
-                            src={getImageUrl(item)}
-                            alt={item.name}
-                            width={180}
-                            height={160}
-                            className={`rounded-${rounded} w-100`}
-                            style={{ objectFit: 'cover' }}
-                        />
+                    <Link to={`${typeLink}/${item.id}`} className="d-block">
+                        <div
+                            className={`rounded-${rounded} overflow-hidden mx-auto`}
+                            style={{
+                                width: '100%',
+                                aspectRatio: '1 / 1',
+                                backgroundColor: '#222',
+                            }}
+                        >
+                            <img
+                                src={getImageUrl(item)}
+                                alt={item.name}
+                                className="w-100 h-100"
+                                style={{ objectFit: 'cover' }}
+                            />
+                        </div>
                     </Link>
                     {children && children(item)}
                 </div>

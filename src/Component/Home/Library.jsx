@@ -6,13 +6,9 @@ function Library() {
     const [showSearch, setShowSearch] = useState(false)
 
     return (
-        <div className='card bg-dark h-100 rounded-3' style={{
-            minHeight: '78vh',
-            maxHeight: '78vh',
-            width: showLibrary ? 410 : 70,
-            transition: 'width .1s ease'
-        }}>
-            <div className="px-2 card-header d-flex justify-content-center align-items-center gap-2 flex-wrap">
+        <div style={{ width: showLibrary ? 400 : 75, }}>
+
+            <div className="px-2 card-header d-flex justify-content-center align-items-center gap-2">
                 <div className='d-flex align-items-center gap-3'>
                     <button className='btn btn-sm text-white text-center' onClick={() => setShowLibrary(!showLibrary)}>
                         {showLibrary ? <i className="bi bi-arrow-bar-left" style={{ fontSize: 20 }} /> : <i className="bi bi-arrow-bar-right" style={{ fontSize: 20 }} />}
@@ -29,30 +25,31 @@ function Library() {
             </div>
 
             {!showLibrary && (
-                <div className='text-center'>
-                    <button className="btn rounded-pill text-white">
-                        <i className='bi bi-plus' style={{ fontSize: 20 }}></i>
-                    </button>
+                <div className='text-center p-2'>
+                    <i className='bi bi-plus text-white' style={{ fontSize: 20 }}></i>
                 </div>
             )}
 
-            <div className={`px-3 p-2 d-flex justify-content-between align-items-center ${showLibrary ? 'd-block' : 'd-none'}`}>
+            <div className={`p-2 d-flex justify-content-between align-items-center ${showLibrary ? 'd-block' : 'd-none'}`}>
                 <div className='d-flex gap-2'>
-                    <button className='btn rounded-pill text-white' onClick={() => setShowSearch(!showSearch)}><i className='bi bi-search'></i></button>
+                    <button className='btn rounded-pill text-white' onClick={() => setShowSearch(!showSearch)}>
+                        <i className='bi bi-search'></i>
+                    </button>
                     <input
                         className={`${showSearch ? 'd-block' : 'd-none'} rounded-3  `}
                         type="text"
                         placeholder="Search..."
                     />
                 </div>
-                <button className='btn mb-0 text-white'>Gần đây <i className='bi bi-list mb-0'></i></button>
+                <button className='btn p-0 mb-0 text-white'><i className='bi bi-list mb-0'></i></button>
+
             </div>
 
-            <div className='px-2 d-flex justify-content-start'>
-                <Link className='text-decoration-none me-3 text-center'>
+            <div className='card-body d-flex gap-2 p-2'>
+                <Link>
                     <img src="http://dummyimage.com/100x100.png/5fa2dd/ffffff" alt="" className='rounded-pill' width={52} height={52} style={{ objectFit: 'cover' }} />
                 </Link>
-                <div className={`d-flex align-items-center flex-column ${showLibrary ? 'd-block' : 'd-none'}`}>
+                <div className={`d-flex align-items-start flex-column ${showLibrary ? 'd-block' : 'd-none'}`}>
                     <span className='text-white fw-bold'>RHYDER</span>
                     <span className='text-white-50 fw-semibold'>Nghệ sĩ</span>
                 </div>

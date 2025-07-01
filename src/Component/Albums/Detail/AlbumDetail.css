@@ -5,7 +5,13 @@
     transition: all 0.3s ease-out;
 }
 
-.table a:hover {
+table a:hover {
     text-decoration: underline !important;
+    color: white !important;
+
 }
 
+tbody>tr:hover {
+    background-color: black;
+    color: white !important;
+}

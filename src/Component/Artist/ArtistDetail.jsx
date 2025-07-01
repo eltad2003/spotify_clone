@@ -4,7 +4,6 @@ import fetchModel from '../lib/fetchModel'
 import Play from '../Buttons/Play'
 import { formatNum, formatTime } from '../lib/format'
 import TitleSection from '../TitleSection'
-import CardItem from '../CardItem'
 import AlbumComponent from '../Albums/Album/AlbumComponent'
 import Loading from '../Loading'
 
@@ -12,7 +11,6 @@ function ArtistDetail() {
     const { id } = useParams()
 
     const [artist, setArtist] = useState(null)
-    const [artistsRelated, setArtistsRelated] = useState(null)
     const [albums, setAlbums] = useState(null)
     const [topTrack, setTopTrack] = useState(null)
 
@@ -47,13 +45,14 @@ function ArtistDetail() {
     }
 
     return (
-        <div style={{ minHeight: '78vh', maxHeight: '78vh', overflow: 'auto' }}>
-            <div className="card-header bg-secondary rounded-top-3"
+        <div>
+            <div className=" rounded-top-3"
                 style={{
                     position: 'relative',
                     minHeight: 320,
                     backgroundImage: artist.images && artist.images.length > 0 ? `url(${artist.images[0].url})` : undefined,
                     backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat',
                     backgroundPosition: 'center',
 
                 }} >
@@ -95,12 +94,12 @@ function ArtistDetail() {
                 {(showAll ? topTrack.slice(0, 10) : topTrack.slice(0, 5)).map((track, idx) => (
                     <div
                         key={track.id}
-                        className={`bg-dark text-white`}
+                        className={` text-white`}
                         style={{ borderRadius: 12 }}
                         onMouseEnter={() => setHovered(idx)}
                         onMouseLeave={() => setHovered(null)}
                     >
-                        <div className={`row align-items-center p-2   ${hovered === idx ? 'bg' : null}`}>
+                        <div className={`row align-items-center p-2  ${hovered === idx ? 'bg' : null}`}>
                             {/*stt */}
                             <div className="col-auto" style={{ minWidth: 50 }}>
                                 {hovered === idx ? (

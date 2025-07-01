@@ -8,6 +8,7 @@ import AlbumDetail from './Component/Albums/Detail/AlbumDetail';
 import TrackDetail from './Component/Track/TrackDetail';
 import ArtistDetail from './Component/Artist/ArtistDetail';
 import CallbackPage from './Component/Home/CallbackPage';
+import PlaylistDetail from './Component/Playlists/Detail/PlaylistDetail';
 
 
 function App() {
@@ -22,8 +23,9 @@ function App() {
           <Route path='/album/:id' element={<AlbumDetail />} />
           <Route path='/track/:id' element={<TrackDetail />} />
           <Route path='/artist/:id' element={<ArtistDetail />} />
+          <Route path='/playlist/:id' element={<PlaylistDetail />} />
           <Route path='/section'>
-            
+
           </Route>
         </Route>
       </Routes>

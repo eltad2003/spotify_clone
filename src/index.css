@@ -20,3 +20,16 @@ code {
 .bg {
   background: linear-gradient(to right, #000000, #000000);
 }
+
+.bg-header {
+  background: linear-gradient(#171717, #202020);
+
+}
+
+.bg-card-1 {
+  background: linear-gradient(#171717, #171717);
+}
+
+.bg-card-2 {
+  background: linear-gradient(#242424, #000000);
+}

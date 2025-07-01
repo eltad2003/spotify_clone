@@ -14,7 +14,7 @@ function TopTrack() {
 
     return (
         <>
-            {topTracks?.length > 0 && (
+            {topTracks && (
                 <div className='container mt-3'>
                     <TitleSection title={'Top bài hát bạn thích'} url={`/section`} />
                     <CardItem list={topTracks} typeLink={'track'} rounded={'3'}>
